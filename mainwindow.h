@@ -30,7 +30,10 @@ public:
     bool eventFilter(QObject *obj, QEvent *event);
     void clearLayout(QLayout *layout);
     void infa(QObject *obj);
+<<<<<<< HEAD
+=======
     bool createConnection(QFile *file);
+>>>>>>> origin/master
     MainWindow(int i, QWidget *parent = 0);
     ~MainWindow();
 public slots:
@@ -106,7 +109,11 @@ public slots:
     void enter_user();
 };
 
+<<<<<<< HEAD
+bool createConnection(QFile *file);
+=======
 
+>>>>>>> origin/master
 void createConnectionSqlite();
 
 
