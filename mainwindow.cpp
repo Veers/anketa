@@ -97,6 +97,10 @@ MainWindow::MainWindow(int i,QWidget *parent)
     card->setFocus();
     card->setObjectName("search");
     card->installEventFilter(this);
+<<<<<<< HEAD
+=======
+    qDebug()<<this;
+>>>>>>> origin/master
 }
 
 MainWindow::~MainWindow()
@@ -207,7 +211,11 @@ void MainWindow::createMenuBar()
     connect(users,SIGNAL(triggered()),this,SLOT(new_user()));
 }
 
+<<<<<<< HEAD
 bool createConnection(QFile *file)
+=======
+bool MainWindow::createConnection(QFile *file)
+>>>>>>> origin/master
 {
     if(QSqlDatabase::contains(QSqlDatabase::defaultConnection)) {
         QSqlDatabase::database(file->fileName()).close();
@@ -240,12 +248,20 @@ bool createConnection(QFile *file)
         if (!db.open()) {
             qDebug() << "Cannot open database: " << db.lastError().databaseText();
             //statusBar()->showMessage(tr("Нет соединения с базой"));
+<<<<<<< HEAD
             //MainWindow::statusBar()->showMessage(db.lastError().databaseText());
+=======
+            statusBar()->showMessage(db.lastError().driverText());
+>>>>>>> origin/master
             return false;
         }
         else
         {
+<<<<<<< HEAD
             //MainWindow::statusBar()->showMessage(tr("Соединение установлено"));
+=======
+            statusBar()->showMessage(tr("Соединение установлено"));
+>>>>>>> origin/master
             return true;
         }
         file->close();
@@ -489,9 +505,15 @@ void MainWindow::infa(QObject *obj)
     card->setFocus();
 }
 
+<<<<<<< HEAD
 bool MainWindow::eventFilter(QObject *obj, QEvent *event) //обработчик щелчка мыши по фотографии для расскрытия подробной информации
 {
     QMouseEvent *mouse = (QMouseEvent *)event;//получаем событие мыши приводя тип события к событию мыши
+=======
+bool MainWindow::eventFilter(QObject *obj, QEvent *event)
+{
+    QMouseEvent *mouse = (QMouseEvent *)event;
+>>>>>>> origin/master
     if((mouse->button()==Qt::LeftButton)&&(obj->objectName()=="photo")&&(event->type()==QEvent::MouseButtonPress))
     {
         infa(obj);
@@ -505,6 +527,10 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event) //обработчик
 
 bool InfaWidget::eventFilter(QObject *obj, QEvent *event)
 {
+<<<<<<< HEAD
+=======
+    qDebug()<<wind;
+>>>>>>> origin/master
     QMouseEvent *mouse = (QMouseEvent *)event;
     if((mouse->button()==Qt::RightButton)&&(obj->objectName()=="picture")&&(event->type()==QEvent::MouseButtonPress))
     {
@@ -516,9 +542,15 @@ bool InfaWidget::eventFilter(QObject *obj, QEvent *event)
         menu.addAction(download);
         menu.addSeparator();
         menu.addAction(cancel);
+<<<<<<< HEAD
         connect(save,SIGNAL(triggered()),wind,SLOT(save_image()));//подключаемся к слотам
         connect(download,SIGNAL(triggered()),wind,SLOT(download_image()));//подключаемся к слотам
         connect(cancel,SIGNAL(triggered()),&menu,SLOT(close()));//
+=======
+        connect(save,SIGNAL(triggered()),wind,SLOT(save_image()));
+        connect(download,SIGNAL(triggered()),wind,SLOT(download_image()));
+        connect(cancel,SIGNAL(triggered()),&menu,SLOT(close()));
+>>>>>>> origin/master
         menu.exec(mouse->globalPos());
         return true;
     }
@@ -528,7 +560,11 @@ bool InfaWidget::eventFilter(QObject *obj, QEvent *event)
     }
 }
 
+<<<<<<< HEAD
 void MainWindow::keyPressEvent(QKeyEvent *event)//эмуляция нажатия кнопки поиск когда пользователь поднесет карту
+=======
+void MainWindow::keyPressEvent(QKeyEvent *event)
+>>>>>>> origin/master
 {
     if ((event->key()==Qt::Key_Return)&&(focusWidget()->objectName()=="search"))
     {
@@ -540,14 +576,22 @@ void MainWindow::keyPressEvent(QKeyEvent *event)//эмуляция нажати�
     }
 }
 
+<<<<<<< HEAD
 void MainWindow::clearLineEdit()//очистка полей имя фамилия отчество когда идет поиск по карте
+=======
+void MainWindow::clearLineEdit()
+>>>>>>> origin/master
 {
     nm->clear();
     ln->clear();
     mn->clear();
 }
 
+<<<<<<< HEAD
 void MainWindow::reconnect()// переподключение к базам данных по кнопке в меню
+=======
+void MainWindow::reconnect()
+>>>>>>> origin/master
 {
     QFile *timex = new QFile("timex.ini");
     QFile *marc = new QFile("marc.ini");
@@ -555,11 +599,19 @@ void MainWindow::reconnect()// переподключение к базам да
     createConnection(marc);
 }
 
+<<<<<<< HEAD
 void MainWindow::settings()// вызов настроек в зависимости от кнопки
 {
     qDebug()<<sender()->objectName();
     QFile *file;
     if(sender()->objectName()=="timex")//выбираем файл настроек в зависимости от нажатой кнопки
+=======
+void MainWindow::settings()
+{
+    qDebug()<<sender()->objectName();
+    QFile *file;
+    if(sender()->objectName()=="timex")
+>>>>>>> origin/master
     {
         file = new QFile("timex.ini");
     }
@@ -567,7 +619,11 @@ void MainWindow::settings()// вызов настроек в зависимос�
     {
         file = new QFile("marc.ini");
     }
+<<<<<<< HEAD
     file->open(QIODevice::ReadWrite | QIODevice::Text);//открываем файл для чтения
+=======
+    file->open(QIODevice::ReadWrite | QIODevice::Text);
+>>>>>>> origin/master
     Widget *w = new Widget;
     w->file=file;
     QPushButton *button = new QPushButton;
@@ -579,7 +635,11 @@ void MainWindow::settings()// вызов настроек в зависимос�
     QLineEdit * pass =new QLineEdit;
     pass->setEchoMode(QLineEdit::Password);
     button->setText(tr("Сохранить настройки"));
+<<<<<<< HEAD
     server->setText(file->readLine().replace("\n",""));//читаем файл построчно и удаляем символы конца строки
+=======
+    server->setText(file->readLine().replace("\n",""));
+>>>>>>> origin/master
     port->setText(file->readLine().replace("\n",""));
     bdname->setText(file->readLine().replace("\n",""));
     user->setText(file->readLine().replace("\n",""));
@@ -592,12 +652,17 @@ void MainWindow::settings()// вызов настроек в зависимос�
     vbox->addWidget(button);
     w->setLayout(vbox);
     file->close();
+<<<<<<< HEAD
     connect(button,SIGNAL(clicked()),w,SLOT(saveSettings()));//подключаемся к слоту сохранения настроек
+=======
+    connect(button,SIGNAL(clicked()),w,SLOT(saveSettings()));
+>>>>>>> origin/master
     w->setWindowModality(Qt::ApplicationModal);
     w->setWindowTitle(tr("Настройки соединения"));
     w->show();
 }
 
+<<<<<<< HEAD
 void MainWindow::fn_new_user()//новый пользователь
 {
     QString str="add";
@@ -611,6 +676,21 @@ void MainWindow::fn_update_user()//обновления пользователя
 }
 
 void MainWindow::add_update(QString *act, QObject *obj)//функция добавления_обновления
+=======
+void MainWindow::fn_new_user()
+{
+    QString str="add";
+    add_update(&str,sender());
+}
+
+void MainWindow::fn_update_user()
+{
+    QString str="upd";
+    add_update(&str,sender());
+}
+
+void MainWindow::add_update(QString *act, QObject *obj)
+>>>>>>> origin/master
 {
     QLineEdit* edit = obj->parent()->findChild<QLineEdit*>("cardnumber");
     QTextEdit *text = obj->parent()->findChild<QTextEdit*>();
@@ -624,7 +704,11 @@ void MainWindow::add_update(QString *act, QObject *obj)//функция доба
     QComboBox *box = obj->parent()->findChild<QComboBox*>();
     qDebug()<<box->currentText();
     QSqlQuery query(QSqlDatabase::database("marc.ini"));
+<<<<<<< HEAD
     QString str="SELECT RDR_ID FROM READERS where custom9='%1'";//находим RDR_ID по номеру карты
+=======
+    QString str="SELECT RDR_ID FROM READERS where custom9='%1'";
+>>>>>>> origin/master
     int a,i,rdr_id,nm;
     i=0;
     if(edit->text().length()>8)//подправить на =10 когда добавят нули и уберут отрицательные значания
@@ -647,7 +731,11 @@ void MainWindow::add_update(QString *act, QObject *obj)//функция доба
     rdr_id=query.value(0).toInt();
     qDebug()<<str;
     QList<QLineEdit *> lineedits = obj->parent()->findChildren<QLineEdit *>();
+<<<<<<< HEAD
     foreach(QLineEdit * lineedit, lineedits)//пробегаемся по всем полям и записываем их информацию в массив
+=======
+    foreach(QLineEdit * lineedit, lineedits)
+>>>>>>> origin/master
     {
         qDebug() <<lineedit->text();
         user[i]=lineedit->text();
@@ -665,7 +753,11 @@ void MainWindow::add_update(QString *act, QObject *obj)//функция доба
         errorMesage(message);
         return;
     }
+<<<<<<< HEAD
     if((act==add)&&(rdr_id==0))// добавляем нового пользователя
+=======
+    if((act==add)&&(rdr_id==0))
+>>>>>>> origin/master
     {
         str="Select MAX(RDR_ID) FROM READERS";
         query.exec(str);
@@ -675,7 +767,11 @@ void MainWindow::add_update(QString *act, QObject *obj)//функция доба
         str="INSERT INTO READERS (RDR_ID,CODE,NAME,BIRTHDAY,PASSPORT,ADDRESS,EMAIL,HOMEPHONE,POST,REGDATE,CUSTOM9) Values ('%10','%1','%2',%3,'%4','%5','%6','%7','%8',%11,'%9')";
         foto2="INSERT INTO RDRPHOTO (RDR_ID,PHOTO,EXT) Values ('%1','%2','JPEG')";
     }
+<<<<<<< HEAD
     if((act==upd)&&(rdr_id!=0))//обновляем пользователя
+=======
+    if((act==upd)&&(rdr_id!=0))
+>>>>>>> origin/master
     {
         nm=rdr_id;
         str="UPDATE READERS set CODE='%1',NAME='%2',BIRTHDAY=%3,PASSPORT='%4',ADDRESS='%5',EMAIL='%6',HOMEPHONE='%7',POST='%8',REREGDATE='%11',CUSTOM9='%9' where RDR_ID = '%10' ";
@@ -688,7 +784,11 @@ void MainWindow::add_update(QString *act, QObject *obj)//функция доба
         dt2.setDate(1900,1,1);
         int date=dt2.daysTo(dt);
         qDebug()<<dt<<" "<<dt2<<""<<date;
+<<<<<<< HEAD
         str=str.arg(box->currentText())//добавляем в запрос данные о пользователе
+=======
+        str=str.arg(box->currentText())
+>>>>>>> origin/master
                 .arg(user[0]+' '+user[1]+' '+user[2])
                 .arg(date)
                 .arg(user[7]+' '+user[8]+' '+user[10]+' '+user[9])
@@ -707,7 +807,11 @@ void MainWindow::add_update(QString *act, QObject *obj)//функция доба
     }
 }
 
+<<<<<<< HEAD
 void MainWindow::update_timex_user()// обновление пользователя в базе данных matrix
+=======
+void MainWindow::update_timex_user()
+>>>>>>> origin/master
 {
     QLineEdit* edit = sender()->parent()->findChild<QLineEdit*>("cardnumber");
     QTextEdit *text = sender()->parent()->findChild<QTextEdit*>();
@@ -772,7 +876,11 @@ void MainWindow::update_timex_user()// обновление пользовате
 
 }
 
+<<<<<<< HEAD
 void MainWindow::errorMesage(QString message)//сообщение об ошибке
+=======
+void MainWindow::errorMesage(QString message)
+>>>>>>> origin/master
 {
     QMessageBox msgBox;
     msgBox.setText(message);
@@ -790,7 +898,11 @@ void QLoginDialog::errorMesage(QString message)
     msgBox.exec();
 }
 
+<<<<<<< HEAD
 void MainWindow::new_user()//пользователь программы
+=======
+void MainWindow::new_user()
+>>>>>>> origin/master
 {
     QWidget *w = new QWidget;
     w->setObjectName("new_user");
@@ -806,10 +918,17 @@ void MainWindow::new_user()//пользователь программы
     listWidget->setMinimumHeight(200);
     QListWidgetItem *newItem;
     qDebug()<<"Users database";
+<<<<<<< HEAD
     QString str="select login from users";//запрос пользователей из базы
     QSqlQuery query(QSqlDatabase::database("SQLITE"));
     query.exec(str);
     while(query.next())//формирование списка пользователей
+=======
+    QString str="select login from users";
+    QSqlQuery query(QSqlDatabase::database("SQLITE"));
+    query.exec(str);
+    while(query.next())
+>>>>>>> origin/master
     {
         newItem = new QListWidgetItem;
         newItem->setText(query.value(0).toString());
@@ -837,29 +956,48 @@ void MainWindow::new_user()//пользователь программы
     w->show();
 }
 
+<<<<<<< HEAD
 void MainWindow::add_user()//добавление пользователя
+=======
+void MainWindow::add_user()
+>>>>>>> origin/master
 {
     QString str="";
     add_change_user(str,str,0);
 }
 
+<<<<<<< HEAD
 void MainWindow::save_user()//сохранения пользователя
+=======
+void MainWindow::save_user()
+>>>>>>> origin/master
 {
     QList<QLineEdit *> lineedits = sender()->parent()->findChildren<QLineEdit *>();
     QString str;
     QComboBox *box = sender()->parent()->findChild<QComboBox*>();
     QSqlQuery query(QSqlDatabase::database("SQLITE"));
+<<<<<<< HEAD
     str="select id from users where login=%1";//запрашиваем пользователя с тавим именем
     str=str.arg(lineedits.at(0)->text());
     query.exec(str);
     if(!query.next())//если запрос пустой то добавляем пользователя
+=======
+    str="select id from users where login=%1";
+    str=str.arg(lineedits.at(0)->text());
+    query.exec(str);
+    if(!query.next())
+>>>>>>> origin/master
     {
         str="insert into users(login,password,rol) values('%1','%2',%3)";
         str=str.arg(lineedits.at(0)->text()).arg(lineedits.at(1)->text()).arg(box->currentIndex());
         qDebug()<<str;
         query.exec(str);
     }
+<<<<<<< HEAD
     else//сообщение об ошибке
+=======
+    else
+>>>>>>> origin/master
     {
         QString message=tr("Уже есть пользователь с таким именем");
         errorMesage(message);
@@ -867,12 +1005,21 @@ void MainWindow::save_user()//сохранения пользователя
     new_user();
 }
 
+<<<<<<< HEAD
 void MainWindow::delete_user()//удаление пользователя
 {
     QWidget *widget=(QWidget*)sender()->parent();//находим родителя объекта вызвавшего событие
     QListWidget* list=widget->findChild<QListWidget *>();//находим его потомков
     QString str;
     if(list->count())//находим выбранный объект
+=======
+void MainWindow::delete_user()
+{
+    QWidget *widget=(QWidget*)sender()->parent();
+    QListWidget* list=widget->findChild<QListWidget *>();
+    QString str;
+    if(list->count())
+>>>>>>> origin/master
     {
         QSqlQuery query(QSqlDatabase::database("SQLITE"));
         str="delete from users where login='%1'";
@@ -884,7 +1031,11 @@ void MainWindow::delete_user()//удаление пользователя
     }
 }
 
+<<<<<<< HEAD
 void MainWindow::change_user()//функция изменения пользователя
+=======
+void MainWindow::change_user()
+>>>>>>> origin/master
 {
     QWidget *widget=(QWidget*)sender()->parent();
     QListWidget* list=widget->findChild<QListWidget *>();
@@ -892,7 +1043,11 @@ void MainWindow::change_user()//функция изменения пользов
     if(list->count())
     {
         QSqlQuery query(QSqlDatabase::database("SQLITE"));
+<<<<<<< HEAD
         str="select login,password,rol from users where login='%1'";//получаем данные выделенного объекта
+=======
+        str="select login,password,rol from users where login='%1'";
+>>>>>>> origin/master
         str=str.arg(list->currentItem()->text());
         qDebug()<<str;
         query.exec(str);
@@ -902,17 +1057,29 @@ void MainWindow::change_user()//функция изменения пользов
         str3=query.value(2).toString();
     }
     delete_user();
+<<<<<<< HEAD
     add_change_user(str1,str2,str3.toInt());//вызываем функцию измения с новыми данными
 
 }
 
 void MainWindow::add_change_user(QString str, QString str2, int index)//формируется окно с данными пользователя
+=======
+    add_change_user(str1,str2,str3.toInt());
+
+}
+
+void MainWindow::add_change_user(QString str, QString str2, int index)
+>>>>>>> origin/master
 {
     QWidget *w = new QWidget;
     QGridLayout *grid = new QGridLayout;
     QLineEdit *name = new QLineEdit;
     QLineEdit *pass = new QLineEdit;
+<<<<<<< HEAD
     QComboBox *roli = new QComboBox;//список ролей пользователей
+=======
+    QComboBox *roli = new QComboBox;
+>>>>>>> origin/master
     QPushButton *save_user = new QPushButton;
     QPushButton *cancel = new QPushButton;
     pass->setEchoMode(QLineEdit::Password);
@@ -939,7 +1106,11 @@ void MainWindow::add_change_user(QString str, QString str2, int index)//форм
     w->show();
 }
 
+<<<<<<< HEAD
 void MainWindow::save_image()//сохранение фотографии
+=======
+void MainWindow::save_image()
+>>>>>>> origin/master
 {
     QString fileName = QFileDialog::getSaveFileName(this, tr("Сохранить изображение"),
                                                     "/home/jana/untitled.jpg",
@@ -948,7 +1119,11 @@ void MainWindow::save_image()//сохранение фотографии
     label->pixmap()->save(fileName);
 }
 
+<<<<<<< HEAD
 void MainWindow::download_image()//загрузка нового фото их файла
+=======
+void MainWindow::download_image()
+>>>>>>> origin/master
 {
     QString fileName = QFileDialog::getOpenFileName(this,
                                                     tr("Загрузить изображение"), "/home/image", tr("Image Files (*.png *.jpg *.bmp)"));
@@ -963,7 +1138,11 @@ void MainWindow::download_image()//загрузка нового фото их �
         label->setPixmap(pixmap);
 }
 
+<<<<<<< HEAD
 QLoginDialog::QLoginDialog(QWidget *parent)//конструктор класса
+=======
+QLoginDialog::QLoginDialog(QWidget *parent)
+>>>>>>> origin/master
     : QDialog(parent)
 {
     QTranslator * qt_translator = new QTranslator;
